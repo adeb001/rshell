@@ -31,7 +31,7 @@ int main() {
         } 
         else {
         contain->parse();
-        contain->execute();
+        //contain->execute();
         }
         
     }

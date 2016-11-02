@@ -12,12 +12,12 @@ class stringconnector {
     string executable;
     string argument;
     
-    stringconnector(string a, string b, string c) {
-    executable = a;
-    argument = b;
-    connector = c;
+    // stringconnector(string a, string b, string c) {
+    // executable = a;
+    // argument = b;
+    // connector = c;
     
-    }
+    // }
     //special constructor for the ; case
     stringconnector(string a, string c) {
         executable = a;
@@ -34,8 +34,6 @@ class stringconnector {
         argument.append(a);
         
     }
-    
-    
     
     void output(int u) {
         cout << "Executable" << u << ": " << executable << endl;
