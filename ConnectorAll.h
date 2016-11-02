@@ -1,0 +1,2 @@
+#ifndef CONNECTORALL_H
+#define CONNECTORALL_H
