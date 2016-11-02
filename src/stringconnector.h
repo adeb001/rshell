@@ -32,7 +32,6 @@ class stringconnector {
     void pushback(string a) {
         argument.append(" ");
         argument.append(a);
-        
     }
     
     void output(int u) {

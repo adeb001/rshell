@@ -55,62 +55,30 @@ class Container : public Core {
     
         int j = 0;
         for (int i = 0; i < charVector.size(); ++i) {
-            
-            if (charVector.at(i) == "&&" || charVector.at(i) == "||") {
-            stringconnector* temp = new stringconnector(charVector.at(j),charVector.at(i));
-        
-            for (j = j + 1; j < i; ++j) {
-                temp->specialpushback(charVector.at(j));
-            }
-            
-             for (j = j + 2; j < i; ++j) {
-                temp->pushback(charVector.at(j));
-            }
-            j = i + 1;
-            Parsedlist.push_back(temp);
-            }
-            
-            else if(charVector.at(i).at(charVector.at(i).size() - 1) == ';') {
-           // stringconnector* temp = new stringconnector(charVector.at(j),";");
-            //string tempcolon = charVector.at(i);
-            charVector.at(i).erase(charVector.at(i).size()-1 , 1);
-            stringconnector* temp = new stringconnector(charVector.at(j),";");
-            //inital pushback case
-            //temp->specialpushback(charVector.at(j+1));
-            for (j= j + 1; j <= i; ++j) {
-                temp->specialpushback(charVector.at(j));
-            }
-            
-            for (j= j + 2; j <= i; ++j) {
-                temp->pushback(charVector.at(j));
-            }
-            
-            
-        j = i + 1;
-            Parsedlist.push_back(temp);
-            }
-            
-            else if (i == charVector.size() - 1) {
+           
+                 // if i goes to the last list element 
+             if (i == charVector.size() - 1) {
+                
+                
+                //if in the last element holds a ; need to get rid of it
+             if(charVector.at(i).at(charVector.at(i).size() - 1) == ';') {
+                  charVector.at(i).erase(charVector.at(i).size()-1 , 1);
+             }    
+                
                
             if (j == i) {
                 stringconnector* temp = new stringconnector(charVector.at(j),  "X");
                 
                 Parsedlist.push_back(temp);                 
             }  
+            
             else { 
             stringconnector* temp = new stringconnector(charVector.at(j), "X");
         
-        
-            // if (j + 1 <= i) {
-            //     temp->specialpushback(charVector.at(j));
-            // }
-        
-            // for (j = j + 1; j <= i; ++j) {
-            //     temp->specialpushback(charVector.at(j));
-            // }
+ 
             
-            
-             temp->specialpushback(charVector.at(j))
+            j = j + 1;
+            temp->specialpushback(charVector.at(j));
             
              for (j = j + 1; j <= i; ++j) {
                 temp->pushback(charVector.at(j));
@@ -118,13 +86,55 @@ class Container : public Core {
             
               Parsedlist.push_back(temp);
             }
-          }
+          } // if last
+          
+           
+            else if (charVector.at(i) == "&&" || charVector.at(i) == "||") {
+            stringconnector* temp = new stringconnector(charVector.at(j),charVector.at(i));
+        
+        
+        j = j + 1;
+        temp->specialpushback(charVector.at(j));
+            
+             for (j = j + 1; j < i; ++j) {
+                temp->pushback(charVector.at(j));
+            }
+            j = i + 1;
+            Parsedlist.push_back(temp);
+            } // if && or ||
+            
+          
+            //if i reaches a semicolon
+            else if(charVector.at(i).at(charVector.at(i).size() - 1) == ';') {
+           // stringconnector* temp = new stringconnector(charVector.at(j),";");
+            //string tempcolon = charVector.at(i);
+            charVector.at(i).erase(charVector.at(i).size()-1 , 1);
+            stringconnector* temp = new stringconnector(charVector.at(j),";");
+            //inital pushback case
+            //temp->specialpushback(charVector.at(j+1));
+            
+            j = j + 1;
+            temp->specialpushback(charVector.at(j));
+            
+            // for (j= j + 1; j <= i; ++j) {
+            //     temp->specialpushback(charVector.at(j));
+            // }
+            
+            for (j= j + 2; j <= i; ++j) {
+                temp->pushback(charVector.at(j));
+            }
+            
+        j = i + 1;
+            Parsedlist.push_back(temp);
+            }//if ;
+           
+      
         }
         
         //test that outputs the list that we have parsed
-        // for (int k = 0; k < Parsedlist.size(); ++k) {
-        //     Parsedlist.at(k)->output(k+1);
-        // }
+        for (int k = 0; k < Parsedlist.size(); ++k) {
+            Parsedlist.at(k)->output(k+1);
+        }
         
             
     }
@@ -176,7 +186,7 @@ class Container : public Core {
              aoc[1] = anum;
              aoc[2] = NULL;
                
-            cout << aoc[0] << " " << aoc[1] << endl; 
+         //   cout << aoc[0] << " : " << aoc[1] << endl; 
                
                 //cnum = connector
             
@@ -218,7 +228,53 @@ class Container : public Core {
             // WE ONLY ATTEMPT AN EXECUTE IF DOEXECUTE IS TRUE
             //if (doexecute == true) {
    
+    //  pid_t pid = fork();
+    //  int check;
 
+    //  //start forking child process
+    //  if (pid < 0) {     
+    //       perror ("fork");
+    //       exit(1);
+    //  }
+    //  //in the child process if < 0 execute ocmmand
+    //  else if (pid == 0) {          
+    // if (execvp(aoc[0],aoc) < 0) {     
+    // perror("exec");
+    // exit(1);
+    //   }
+    //  }
+    //  //this is the parent wait for child to be done
+    //  else {                                  
+    //  while (wait(&check) != pid);
+    //  }
+   
+            //  pid_t pid = fork();
+             
+            //  if (pid == -1) {
+            //      perror ("fork");
+            //     exit(EXIT_FAILURE);
+            //  }
+             
+            //  if (pid == 0) {
+                 
+            //      if (execvp(aoc[0],aoc) == -1) {
+            //          perror("exec");
+            //          didcommandexecute = true;
+                     
+            //      }
+            //      else {
+            //          didcommandexecute = false;
+            //      }
+                 
+            //  }
+             
+            //  if (pid > 0) {
+            //      if (wait(0) == -1) {
+            //          perror ("wait");
+            //      }
+            //  }
+             
+            
                 
        
    
