@@ -1,2 +1,0 @@
-#ifndef CONNECTORAND_H
-#define CONNECTORAND_H
