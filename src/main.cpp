@@ -11,9 +11,9 @@ using namespace std;
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <stdlib.h>
+#include <sys/mman.h>
 
 using namespace boost;
-
 
 int main() {
     
@@ -31,7 +31,7 @@ int main() {
         } 
         else {
         contain->parse();
-       contain->execute();
+        contain->execute();
         }
         
     }
