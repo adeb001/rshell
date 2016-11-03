@@ -156,7 +156,8 @@ class Container : public Core {
             int aa = Parsedlist.at(z)->executable.size(); 
             //cstring of executable
             //char* xnum = new char[aa+1];
-            char xnum[aa + 1];
+            //char xnum[aa + 1];
+            char* xnum = new char[aa + 1];
             xnum[aa] = '\0';
             for (int ab = 0; ab < aa; ++ab) {
                 xnum[ab] = Parsedlist.at(z)->executable.at(ab);
@@ -164,7 +165,8 @@ class Container : public Core {
             //cstring of argument
             int ac = Parsedlist.at(z)->argument.size();
             //char* anum = new char[ac+1];
-            char anum[ac + 1];
+            //char anum[ac + 1];
+            char* anum = new char[ac + 1];
             anum[ac] = '\0';
              
             for (int ad = 0; ad < ac; ++ad) {
@@ -295,8 +297,10 @@ class Container : public Core {
             
             //assign prevcon here so we know it for the next loop
             //truth values and connectors reset if we reach a ;
-
+		
             prevcon = Parsedlist.at(z)->connector;
+	delete[] anum;
+	delete[] xnum;
               }// for int z
   
     }
