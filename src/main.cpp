@@ -33,6 +33,10 @@ int main() {
         contain->parse();
         contain->execute();
         }
+        //added for when user types run later on
+        if (contain->run == 0) {
+            run = 0;
+        }
         
     }
     while(run != 0);

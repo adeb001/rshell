@@ -8,18 +8,21 @@ class stringconnector {
     
     
     public:
+    
+    bool start;
+    bool mid;
+    bool end;
+    
+    
     string connector;
     string executable;
     string argument;
     
-    // stringconnector(string a, string b, string c) {
-    // executable = a;
-    // argument = b;
-    // connector = c;
-    
-    // }
     //special constructor for the ; case
     stringconnector(string a, string c) {
+        start = false;
+        mid = false;
+        end = false;
         executable = a;
         connector = c;
         argument = "";

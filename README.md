@@ -28,6 +28,12 @@ and takes an input of commands in various forms including:
   
 `$ exit`  
   
+  * Test Command that shows if the file/directory exists  
+`$ test -e bin or [ -e bin ]`  
+  
+  * Precedence command ()  
+  
+`$ (echo hi && echo hello) || echo world`
 
 ## Project Overview
 
@@ -111,9 +117,39 @@ The program should be able to do error checking like:
   
 `ech: command not found`  
   
-to see if all test case were dealt with. 
+to see if all test case were dealt with.  
+  
+As of 11/14/2016, we have added the test command that outputs the string (True)  
+if the specified file/directory does exist. Here is an example:  
+  
+`$ test -e bin`  
+  
+This function should be in an if statement to check if test or the open bracket [  
+is found therefore, implementing the test command which we separately written its  
+function so it does not go to execvp.  
+  
+The input above will output the string (True) because that directory does exist.  
+We can also handle its other form which is shown here:  
+  
+`$ [ -e bin ]`  
+  
+which is exactly the same as the above statement.  
+  
+  
+Next, we have added the precedence operator which runs the commands based on its precedence  
+in the command line. Commands inside the parenthesis will be handled first before the  
+operators outside. The trick is to add a checker in the parsing function so when it sees the  
+parenthesis, it will know that the commands inside will take priority in being executed before  
+the rest while still checking the operators if necessary. Here is an example:  
+  
+`$ (echo hi && echo hello) || echo world`  
+  
+which outputs
 
-
+`hi`  
+  
+`hello`  
+  
 
 
 ## KNOWN BUGS
@@ -201,3 +237,6 @@ but in our program it concatenates the whole line because the whitespace was mis
 `hi&& echo hello`  
   
 asd
+
+
+
