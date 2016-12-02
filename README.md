@@ -150,6 +150,25 @@ which outputs
   
 `hello`  
   
+As of 11/28/2016, we have added the cd command whose purpose is navigate through the directories.  
+We have two environment variables PWD and OLDPWD which hold the paths for each execution of the cd  
+command. Here is an example for the cd command:  
+  
+`$ cd bin`  
+  
+if the folder bin exists, this command will update the current environment path to be \oldpath\bin  
+but if the folder does not exist, it will print an error message. For this new cd function, we were  
+to include three functionality namely:  
+  
+`cd`  
+  
+`cd -`  
+  
+`cd <PATH>`  
+  
+and each command should still work with the past functionality we had before including the test command  
+and normal execvp commands.
+  
 
 
 ## KNOWN BUGS

@@ -14,7 +14,11 @@
 #include <fstream>
 #include "test.h"
 #include <sys/stat.h>
-
+#include <sys/param.h>
+#include <unistd.h>
+#include <stdio.h>  
+#include <stdlib.h>  
+#include "cd.h"
 
 using namespace boost;
 
@@ -35,7 +39,11 @@ class Container : public Core {
     ~Container(){}
     
     void read() {
-        cout << "$ "; 
+        
+   char buff[MAXPATHLEN]; 
+   char *path2 = getcwd(buff, MAXPATHLEN); // gets our current directory
+        
+        cout << path2 << " $ "; 
         getline(cin,userinput);
     }
     void parse() { 
@@ -134,18 +142,33 @@ class Container : public Core {
 
         }
 
+    int index;
     // assignment 3 update
     //here we check for the () 
     for (unsigned int t = 0; t < Parsedlist.size(); ++t) {
     
-     int outindex = Parsedlist.at(t)->argument.size() - 1;
+    int outindex;
+     if (Parsedlist.at(t)->argument.size() != 0) {
+     outindex = Parsedlist.at(t)->argument.size() - 1;
+     } else {
+         break;
+     }
+    
         if (Parsedlist.at(t)->executable.at(0) == '(') {
         Parsedlist.at(t)->start = true;
         Parsedlist.at(t)->executable.erase(0,1);
         
        
         for (unsigned int b = t; b < Parsedlist.size(); ++b) {
-                int index = Parsedlist.at(b)->argument.size() - 1;
+            
+                if (Parsedlist.at(b)->argument.size() != 0) {
+                index = Parsedlist.at(b)->argument.size() - 1;
+                }
+                else {
+                    break;
+                }
+                
+                
             if(Parsedlist.at(b)->argument.at(index) == ')') {
                 Parsedlist.at(b)->end = true;
                 Parsedlist.at(b)->argument.resize(index);
@@ -166,14 +189,13 @@ class Container : public Core {
         Parsedlist.resize(0);
         cout << "bash: syntax error near unexpected token `)'" << endl;
     }
-    
-    
-    
+      
     }//end of for
     //here we deal with the [    ] test case    
     //  cout << Parsedlist.at(0)->argument << endl;
     // cout << Parsedlist.at(0)->executable << endl;
         
+    
     
     for (unsigned int r = 0; r < Parsedlist.size(); ++r) {
         
@@ -218,12 +240,27 @@ class Container : public Core {
         }
         
     }
+    
+    //bad program skills cover up
+    for (unsigned int qq = 0; qq < Parsedlist.size(); ++qq) {
+        
+        if (Parsedlist.at(qq)->executable == "cd-") {
+            Parsedlist.at(qq)->argument = "";
+        }
         
     }
     
+    // now we make the cd commands, all three  cases
+    
+        
+    }
     
     void execute() {
  
+        char cdcomp[] =  "cd";
+        char cdcomp2[] =  "cd-";
+        char empty[] = "";
+        char dash[] = "-";
         // comment catcher
         char testy[] = "test"; // for the test analysis
         
@@ -411,11 +448,32 @@ class Container : public Core {
             
             // WE ONLY ATTEMPT AN EXECUTE IF DOEXECUTE IS TRUE
             if (doexecute == true) {
+                //aoc[0] = cd
+                if (strcmp(cdcomp,aoc[0]) == 0)  {
+                    //aoc[1] is empty
+                    if (strcmp(empty,aoc[1]) == 0) {
+                    didcommandexecute = cd3();
+                    }
+                    //aoc[1] = a directory name
+                    else if (strcmp(dash,aoc[1]) == 0) {
+                   
+                   didcommandexecute = cd2();
+                    }
+                   else {
+                    string ele = aoc[1];
+                    didcommandexecute = cd(ele);
+                    }
                 
-        
+                    
+                }
+                //aoc[0] = cd-
+                // else if (strcmp(cdcomp2,aoc[0]) == 0) {
+                //     didcommandexecute = cd2();
+                // }
+ 
  
                 // this tests if test == test
-                if (strcmp(testy,aoc[0]) == 0) {
+                else if (strcmp(testy,aoc[0]) == 0) {
                     //cout << "PLEASE" << endl;
                 
                  didcommandexecute = TestCommand(aoc[1]);   
@@ -449,7 +507,7 @@ class Container : public Core {
                     }
                 }
             } //else
-            
+            //} // else2
             } //if doexecute = true
     
             //here we assign the truth values
