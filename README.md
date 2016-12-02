@@ -11,7 +11,7 @@ This program outputs the command line prompt
 `$`  
   
   
-and takes an input of commands in various forms including:  
+and  takes an input of commands in various forms including:  
   * Single Commands  
   
 `$ ls -a;`  
