@@ -10,7 +10,7 @@ using namespace std;
 //also case of cd bin
 bool cd(string a) {
     
-char *test = getenv("OLDPWD"); // at the start of the program, OLDPWD should be NULL.
+//char *test = getenv("OLDPWD"); // at the start of the program, OLDPWD should be NULL.
 char b2[MAXPATHLEN];
 char *p2 = getcwd(b2, MAXPATHLEN); //   /home/ubuntu/workspace/CS100/practice 
 
@@ -35,8 +35,8 @@ return true;
 bool cd2() {
     
 char *test = getenv("OLDPWD"); // at the start of the program, OLDPWD should be NULL.
-char b2[MAXPATHLEN];
-char *p2 = getcwd(b2, MAXPATHLEN); //   /home/ubuntu/workspace/CS100/practice 
+//char b2[MAXPATHLEN];
+//char *p2 = getcwd(b2, MAXPATHLEN); //   /home/ubuntu/workspace/CS100/practice 
 
 
 
@@ -58,7 +58,7 @@ char *p2 = getcwd(b2, MAXPATHLEN); //   /home/ubuntu/workspace/CS100/practice
 }
 //home
 bool cd3() {
-    char *test = getenv("OLDPWD"); // at the start of the program, OLDPWD should be NULL.
+//char *test = getenv("OLDPWD"); // at the start of the program, OLDPWD should be NULL.
 char b2[MAXPATHLEN];
 char *p2 = getcwd(b2, MAXPATHLEN); //   /home/ubuntu/workspace/CS100/practice 
 

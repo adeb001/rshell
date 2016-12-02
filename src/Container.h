@@ -258,7 +258,7 @@ class Container : public Core {
     void execute() {
  
         char cdcomp[] =  "cd";
-        char cdcomp2[] =  "cd-";
+        //char cdcomp2[] =  "cd-";
         char empty[] = "";
         char dash[] = "-";
         // comment catcher
